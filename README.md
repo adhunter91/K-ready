@@ -1,11 +1,11 @@
 
-# PLAI
-Python Code for PLAI development
+# K-Ready
+Python Code for K-Ready development
 =======
-# PLAI_Webapp
+# K-Ready_Webapp
 
 ## Overview
-PLAI assesses children between ages 0-5 and helps them get kindergarten ready.
+K-ready assesses children between ages 0-5 and helps them get kindergarten ready.
 It will provide exercises to fill in their learning gaps. It will also 
 assess children for speech/langugage disorders.
 
