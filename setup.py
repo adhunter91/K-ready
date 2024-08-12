@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='PLAI_webapp',
+    name='Kready_webapp',
     version='0.1',
-    author='Alexander Hunter',
+    author='adhunter91',
     author_email='',
     description='Webapp to help kids get kindergarten ready',
     long_description=open('README.md').read(),
