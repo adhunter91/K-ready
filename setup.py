@@ -4,11 +4,11 @@ setup(
     name='PLAI_webapp',
     version='0.1',
     author='Alexander Hunter',
-    author_email='alexander.hunter@berkeley.edu',
+    author_email='',
     description='Webapp to help kids get kindergarten ready',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/adhunter91/PLAI',
+    url='https://github.com/adhunter91/K-ready',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
