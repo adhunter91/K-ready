@@ -11,6 +11,7 @@ from supabase import create_client, Client
 load_dotenv(find_dotenv())
 print(f"Supabase_URL: {os.getenv('SUPABASE_URL')}")
 print(f"Supabase_API_KEY: {os.getenv('SUPABASE_KEY')}")
+
 class SkillData:
 
     # Mappings defined for easy mapping from the screener based on the skill_name_id
@@ -62,6 +63,12 @@ class SkillData:
             'tskill': 'TSkill'
         }
 
+    '''
+    
+    The methods below will be used for database operations based on the categorization of the data.
+    All skills are mapped by domain, category and a skill_id.
+    
+    '''
     def add_skill(self, domain, category, skill_name_id, value):
         binary_value = 1 if value.lower() in SkillData.positive_values else 0
         if domain not in self.data:
@@ -159,24 +166,7 @@ class SkillData:
         logging.info(f"Scores for all categories: {scores}")
         return scores
 
-    def initialize_user_tmp(self, email: str) -> str:
-        # Insert the user into the database
-        response = self.supabase.from_("users").insert({"email": email}).execute()
-        if not response.data:
-            logging.error(f"Error inserting user: {response.status_code} - {response.error_message}")
-            return None
-        user_id = response.data[0]['user_id']
-        logging.info(f"User initialized with ID: {user_id}")
-        return user_id
-
-    def extract_email_from_webhook(self, webhook_data: dict[str, any]) -> str:
-        # Extract email from the webhook data
-        email = webhook_data.get('email')
-        if email:
-            logging.info(f"Extracted email from webhook: {email}")
-        else:
-            logging.warning("No email found in webhook data")
-        return email
+  
     def update_skill_value(self, user_id: str, domain: str, category: str, skill_name_id: str, value: any):
         # Create a dictionary for the skill to update
         skill_filter = {
@@ -296,3 +286,25 @@ class SkillData:
             transformed_key = transform_variable_name(key, mapping)
             transformed_dict[transformed_key] = value
         return transformed_dict
+
+# These methods were used for beta testing, authentication will be integrated via Supabase/Google Cloud
+
+  def initialize_user_tmp(self, email: str) -> str:
+        # Insert the user into the database
+        response = self.supabase.from_("users").insert({"email": email}).execute()
+        if not response.data:
+            logging.error(f"Error inserting user: {response.status_code} - {response.error_message}")
+            return None
+        user_id = response.data[0]['user_id']
+        logging.info(f"User initialized with ID: {user_id}")
+        return user_id
+
+    def extract_email_from_webhook(self, webhook_data: dict[str, any]) -> str:
+        # Extract email from the webhook data
+        email = webhook_data.get('email')
+        if email:
+            logging.info(f"Extracted email from webhook: {email}")
+        else:
+            logging.warning("No email found in webhook data")
+        return email
+        
