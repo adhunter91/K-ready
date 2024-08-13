@@ -4,7 +4,7 @@ from flask import Blueprint, request, jsonify, current_app
 from dotenv import load_dotenv, find_dotenv
 from ..services.screener_processing import filter_data_by_skill, find_total_skills
 from ..services.generate_story import generate_story
-from ..services.skill_data import SkillData  # Ensure the correct path to your SkillData class
+from ..services.skill_data import SkillData  
 import requests
 
 
@@ -48,6 +48,7 @@ def api_test():
         current_app.logger.info(f"POST request data: {request.json}")
         return jsonify({"message": "POST request received", "This is the received data": data})
 
+# Receives results from webhook and processes the screener results
 
 @bp.route('/calculate_score', methods=['GET', 'POST'])
 def calculate_score():
@@ -69,12 +70,8 @@ def calculate_score():
         user_id = skill_data.initialize_user_tmp(email)
         current_app.logger.info(f"Initialized User_id: {user_id}")
 
-        #skill_data.print_skills()
+       
         skill_data.print_data()
-
-        # Convert skill values to binary and summarize
-        #binary_values = skill_data.convert_skill_values_to_binary("language_and_literacy", "alphabet_knowledge")
-        #current_app.logger.info(f"Binary Values: {binary_values}")
 
         phonological_awareness_score = skill_data.calculate_score_in_category("language_and_literacy", "phonological_awareness")
         print_knowledge_score = skill_data.calculate_score_in_category("language_and_literacy", "print_knowledge")
@@ -101,7 +98,7 @@ def calculate_score():
 
         #skills_score = find_total_skills(filtered_data)
         #current_app.logger.info(f"Filtered Skills {skills_score}")
-        # Maybe make this send one large data packet
+        
         return jsonify({"message": "POST request received", "This is the received data": all_score_categories})
 
 
@@ -124,13 +121,6 @@ def send_to_java_test():
         response = jsonify({"status": "success", "data": data_store})
         response.headers['Content-Type'] = 'application/json'
         return response
-#Receive results
-# Convert to format
-# Loop through Dictionary and assign to new dict based on matches
-# Count Score, all Yeses, count total entries
-# Send to Database with Scores: Table " DB"
-# Extract email, Add user profile contents, add as last question
-# Create user_ID
 
 # Error Handling and configuring
 
