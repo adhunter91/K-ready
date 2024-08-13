@@ -17,7 +17,8 @@ def generate_story(score: int, max_tokens=500):
     prompt: str = f"""Write a children's story about a princess named Janelle.
               She's smart and loves to have fun. Include whimsical elements of traveling through a forest.
               Ensure words start letter 'r' often in the story. Many words will use the letter r because that
-              is where the child is struggling. Use 100 words MAXIMUM. MAKE SURE TO END THE STORY BASED ON THE LIMIT"""
+              is where the child is struggling. Use 100 words for the story MAXIMUM. MAKE SURE TO END THE STORY BASED ON THE LIMIT
+              Ensure sentences are 6-8 words long and are coherent. """
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages=[
