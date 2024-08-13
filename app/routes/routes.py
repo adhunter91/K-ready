@@ -36,8 +36,8 @@ def generate_story_endpoint():
         return jsonify({'story': story})
 
 
-@bp.route('/zoho_test', methods=['GET', 'POST'])
-def zoho_test():
+@bp.route('/api_test', methods=['GET', 'POST'])
+def api_test():
     if request.method == 'GET':
         current_app.logger.info(f"GET request args: {request.args}")
         # data = request.args
@@ -49,8 +49,8 @@ def zoho_test():
         return jsonify({"message": "POST request received", "This is the received data": data})
 
 
-@bp.route('/zoho_calculate_score', methods=['GET', 'POST'])
-def zoho_calculate_score():
+@bp.route('/calculate_score', methods=['GET', 'POST'])
+def calculate_score():
     if request.method == 'GET':
         current_app.logger.info(f"GET request args: {request.args}")
         # data = request.args
